@@ -1,0 +1,20 @@
+{
+  "name": "etdsolutions/js",
+  "type": "library",
+  "minimum-stability": "dev",
+  "description": "Librairie JavaScript du Framework ETD",
+  "homepage": "https://github.com/etd-framework/js",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Jean-Baptiste Alleaume",
+      "email": "jb.alleaume@etd-solutions.com",
+      "homepage": "http://alleau.me",
+      "role": "Manager"
+    }
+  ],
+  "require": {
+    "etdsolutions/jquery": "~1.0",
+    "etdsolutions/requirejs": "~2.1"
+  }
+}
