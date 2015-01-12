@@ -10,7 +10,7 @@
 /**
  * Traduction JavaScript I18N pour l'application.
  */
-define(["jquery", "etdsolutions/js/utils/sprintf"], function($, sprintf) {
+define(["jquery", "vendor/etdsolutions/js/utils/sprintf"], function($, sprintf) {
 
     return {
 
