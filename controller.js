@@ -31,7 +31,7 @@ define(["jquery", "vendor/etdsolutions/js/app", "vendor/etdsolutions/js/text"], 
             self.task(options.uri, data, function(data) {
 
                 if (options.successCallback) {
-                    options.successCallback(data, $this);
+                    options.successCallback(data, $this, newValue);
                 }
 
                 $this.data('current', newValue);
