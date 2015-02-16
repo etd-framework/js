@@ -13,7 +13,49 @@ define(["jquery", "vendor/etdsolutions/js/app", "vendor/etdsolutions/js/text"], 
      * Méthodes privées
      */
 
-    function btnCall(self, btnSelector, options, handler) {
+    function sendTask(self, $this, $icon, options, newValue, handler) {
+
+        // On crée l'objet de données.
+        var data = {};
+
+        $.each(options.props, function(i, str) {
+            data[str] =  $this.data(i);
+        });
+
+        data[options.valueName] = newValue;
+        data[options.token] = '1';
+
+        if (!$icon.hasClass('fa-spin')) {
+            $icon.removeClass('fa-warning ' + options.icons).addClass('fa-spin fa-refresh');
+
+            self.task(options.uri, data, function(data) {
+
+                if (options.successCallback) {
+                    options.successCallback(data, $this);
+                }
+
+                $this.data('current', newValue);
+
+                var btnParams = handler(newValue, options.states || {});
+
+                $this.tooltip('destroy');
+                $this.attr('title', text._(btnParams.txt));
+                $this.tooltip({
+                    container: 'body',
+                    html: true
+                });
+                $icon.removeClass('fa-spin fa-refresh').addClass(btnParams.icon);
+
+            }, function() {
+
+                $icon.removeClass('fa-spin fa-refresh').addClass('fa-warning');
+
+            });
+        }
+
+    }
+
+    function btnCall(self, type, btnSelector, options, handler) {
 
         $(btnSelector).on('click', function(e) {
 
@@ -23,45 +65,47 @@ define(["jquery", "vendor/etdsolutions/js/app", "vendor/etdsolutions/js/text"], 
                 $icon = $this.find('.fa');
 
             // On change la valeur.
-            var newValue = 1 - $this.data('current');
+            var newValue;
 
-            // On crée l'objet de données.
-            var data = {};
+            if (type == 'toggle') {
 
-            $.each(options.props, function(i, str) {
-                data[str] =  $this.data(i);
-            });
+                newValue = 1 - $this.data('current');
 
-            data[options.valueName] = newValue;
-            data[options.token] = '1';
+                sendTask(self, $this, $icon, options, newValue, handler);
 
-            if (!$icon.hasClass('fa-spin')) {
-                $icon.removeClass('fa-warning fa-check fa-times').addClass('fa-spin fa-refresh');
+            } else if (type == 'choice') {
 
-                self.task(options.uri, data, function(data) {
+                if (!$this.data('init')) {
 
-                    if (options.successCallback) {
-                        options.successCallback(data, $this);
-                    }
-
-                    $this.data('current', newValue);
-
-                    var btnParams = handler(newValue, options.states || {});
-
-                    $this.tooltip('destroy');
-                    $this.attr('title', text._(btnParams.txt));
-                    $this.tooltip({
-                        container: 'body',
-                        html: true
+                    var html = '';
+                    $.each(options.states, function(val) {
+                        if (val != 'default') {
+                            html += '<label class="radio-inline"><input type="radio" name="' + options.valueName + '" value="' + val + '"> ' + this.txt + '</label>';
+                        }
                     });
-                    $icon.removeClass('fa-spin fa-refresh').addClass(btnParams.icon);
 
-                }, function() {
+                    $this.popover({
+                            html: true,
+                            content: html,
+                            placement: 'bottom',
+                            template: '<div class=\"popover\" role=\"tooltip\"><div class=\"arrow\"></div><div class=\"popover-content\"></div></div>'
+                    }).on('shown.bs.popover', function() {
+                        $this.data('bs.popover').$tip.find('input').on('change', function() {
 
-                    $icon.removeClass('fa-spin fa-refresh').addClass('fa-warning');
+                            $this.popover('hide');
+                            newValue = $(this).val();
+                            sendTask(self, $this, $icon, options, newValue, handler);
 
-                });
+                        });
+                    });
+
+                    $this.data('init', true);
+                    $this.popover('show');
+                }
+
             }
+
+
         });
 
     }
@@ -72,9 +116,9 @@ define(["jquery", "vendor/etdsolutions/js/app", "vendor/etdsolutions/js/text"], 
 
     return {
 
-        createChooseBtn: function(btnSelector, options) {
+        createChoiceBtn: function(btnSelector, options) {
 
-            btnCall(this, btnSelector, options, function(newValue, states) {
+            btnCall(this, 'choice', btnSelector, options, function(newValue, states) {
 
                 var btnParams = {
                     txt: states.default.txt,
@@ -82,10 +126,8 @@ define(["jquery", "vendor/etdsolutions/js/app", "vendor/etdsolutions/js/text"], 
                 };
 
                 if (states[newValue]) {
-
                     btnParams.txt = states[newValue].txt;
                     btnParams.icon = states[newValue].icon;
-
                 }
 
                 return btnParams;
@@ -98,7 +140,9 @@ define(["jquery", "vendor/etdsolutions/js/app", "vendor/etdsolutions/js/text"], 
 
         createToggleBtn: function(btnSelector, options) {
 
-            btnCall(this, btnSelector, options, function(newValue, states) {
+            options['icons'] = 'fa-check fa-times';
+
+            btnCall(this, 'toggle', btnSelector, options, function(newValue, states) {
 
                 var btnParams = {
                     txt: '',
