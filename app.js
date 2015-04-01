@@ -7,7 +7,7 @@
  * @author      ETD Solutions http://etd-solutions.com
  */
 
-define(["jquery", "js/etdsolutions/text"], function($, text) {
+define(["jquery", "etdsolutions/text"], function($, text) {
 
     return {
 
