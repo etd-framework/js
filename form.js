@@ -31,7 +31,7 @@ define(["jquery", "etdsolutions/text"], function($, text) {
                 remote: false
             },
             selectors: {
-                checkboxes: '.list-col-cb input',
+                checkboxes: '.list-col-cb input:enabled',
                 itemButtons: '.btn-list:not(.btn-list-custom)',
                 limitInput: '#limit',
                 checkAll: 'input[name="checkAll"]',
