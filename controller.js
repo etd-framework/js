@@ -88,7 +88,7 @@ define(["jquery", "etdsolutions/app", "etdsolutions/text"], function($, app, tex
                             html: true,
                             content: html,
                             placement: 'bottom',
-                            template: '<div class=\"popover\" role=\"tooltip\"><div class=\"arrow\"></div><div class=\"popover-content\"></div></div>'
+                            template: '<div class=\"popover popover-choice\" role=\"tooltip\"><div class=\"arrow\"></div><div class=\"popover-content\"></div></div>'
                     }).on('shown.bs.popover', function() {
                         $this.data('bs.popover').$tip.find('input').on('change', function() {
 
