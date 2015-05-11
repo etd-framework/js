@@ -40,6 +40,8 @@ define(["jquery", "etdsolutions/text"], function($, text) {
 
             $container.append($list);
 
+            $container.trigger('messages');
+
         },
 
         renderMessage: function(type, message) {
