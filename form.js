@@ -224,11 +224,14 @@ define(["jquery", "etdsolutions/text"], function($, text) {
 
         },
 
-        addSelectTask: function(btnId, task) {
+        addSelectTask: function(btnId, task, askConfirm, confirmMsg) {
             var self = this;
             $('#' + btnId).on('click', function(e) {
                 e.preventDefault();
                 if (self.$form.find(self.options.selectors.checkboxes + ':checked').length > 0) {
+                    if (askConfirm && !confirm(confirmMsg)) {
+                        return this;
+                    }
                     self.submitTask(task, self.options.itemView);
                 } else {
                     alert(text._('APP_ERROR_NO_ITEM_SELECTED'));
