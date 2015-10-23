@@ -140,26 +140,54 @@ define(["jquery", "etdsolutions/app", "etdsolutions/text"], function($, app, tex
 
         createToggleBtn: function(btnSelector, options) {
 
-            options['icons'] = 'fa-check fa-times';
+            if (!options.icons) {
+                options.icons = 'fa-check fa-times';
+            }
 
-            btnCall(this, 'toggle', btnSelector, options, function(newValue, states) {
+            if (options.states) {
 
-                var btnParams = {
-                    txt: '',
-                    icon: ''
+                var callback = function(newValue, states) {
+
+                    var btnParams = {
+                        txt: states.default.txt,
+                        icon: states.default.icon
+                    };
+
+                    if (states[newValue]) {
+                        btnParams.txt = states[newValue].txt;
+                        btnParams.icon = states[newValue].icon;
+                    }
+
+                    return btnParams;
+
                 };
 
-                if (newValue == 1) {
-                    btnParams.txt = 'APP_GLOBAL_YES';
-                    btnParams.icon = 'fa-check';
-                } else {
-                    btnParams.txt = 'APP_GLOBAL_NO';
-                    btnParams.icon = 'fa-times';
-                }
+            } else {
 
-                return btnParams;
+                var callback = function(newValue, states) {
 
-            });
+                    var btnParams = {
+                        txt: '',
+                        icon: ''
+                    };
+
+                    if (newValue == 1) {
+                        btnParams.txt = 'APP_GLOBAL_YES';
+                        btnParams.icon = 'fa-check';
+                    } else {
+                        btnParams.txt = 'APP_GLOBAL_NO';
+                        btnParams.icon = 'fa-times';
+                    }
+
+                    return btnParams;
+
+                };
+
+            }
+
+
+
+            btnCall(this, 'toggle', btnSelector, options, callback);
 
             return this;
 
