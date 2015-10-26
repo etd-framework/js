@@ -240,10 +240,13 @@ define(["jquery", "etdsolutions/text"], function($, text) {
             return this;
         },
 
-        addSubmitTask: function(btnId, task, action) {
+        addSubmitTask: function(btnId, task, action, askConfirm, confirmMsg) {
             var self = this;
             $('#' + btnId).on('click', function(e) {
                 e.preventDefault();
+                if (askConfirm && !confirm(confirmMsg)) {
+                    return this;
+                }
                 self.submitTask(task, action);
             });
             return this;
