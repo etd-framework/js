@@ -14,7 +14,7 @@
     }
   ],
   "require": {
-    "etdsolutions/jquery": "~1.0",
+    "etdsolutions/jquery": "~1.0|~2.0",
     "etdsolutions/requirejs": "~2.1"
   }
 }
