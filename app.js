@@ -2,7 +2,7 @@
  * @package     etd-framework/js
  *
  * @version     1.0
- * @copyright   Copyright (C) 2015 ETD Solutions, SARL Etudoo. Tous droits réservés.
+ * @copyright   Copyright (C) 2015-2016 ETD Solutions. Tous droits réservés.
  * @license     Apache License Version 2.0 (https://raw.githubusercontent.com/etd-framework/js/master/LICENSE)
  * @author      ETD Solutions http://etd-solutions.com
  */
