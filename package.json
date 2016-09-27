@@ -1,0 +1,19 @@
+{
+  "name": "@etd-framework/js",
+  "version": "2.0.0",
+  "description": "ETD Framework JS Package",
+  "homepage": "https://github.com/etd-framework/js",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/etd-framework/js.git"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.14.0"
+  }
+}
