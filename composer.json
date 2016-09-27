@@ -1,0 +1,18 @@
+{
+  "name": "etdsolutions/js",
+  "type": "library",
+  "description": "Librairie JavaScript du Framework ETD",
+  "homepage": "https://github.com/etd-framework/js",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Jean-Baptiste Alleaume",
+      "email": "jb.alleaume@etd-solutions.com",
+      "homepage": "http://alleau.me",
+      "role": "Manager"
+    }
+  ],
+  "suggest": {
+    "etdsolutions/requirejs": "Pour utiliser les modules AMD"
+  }
+}
