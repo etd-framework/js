@@ -7,7 +7,7 @@
  * @author      ETD Solutions http://etd-solutions.com
  */
 
-import "utils";
+import Utils from "etdsolutions/utils";
 
 // Méthodes privées
 // ===============================
