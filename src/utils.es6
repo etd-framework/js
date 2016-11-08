@@ -213,6 +213,7 @@ class Utils {
     }
 
     static elementHasParent(element, parent) {
+
         while (element) {
             if (element === document) {
                 return parent === document;
@@ -222,10 +223,12 @@ class Utils {
             }
             element = element.parentNode;
         }
+
         return false;
     }
 
     static getElementParent(element, selector) {
+
         while (element) {
             if (element === document) {
                 return document;
@@ -235,10 +238,14 @@ class Utils {
             }
             element = element.parentNode;
         }
+
         return false;
     }
 
     static getPreviousSibling(element, selector) {
+
+        element = element.previousSibling;
+
         while (element) {
             if (element === document) {
                 return document;
@@ -248,10 +255,14 @@ class Utils {
             }
             element = element.previousSibling;
         }
+
         return false;
     }
 
     static getNextSibling(element, selector) {
+
+        element = element.nextSibling;
+
         while (element) {
             if (element === document) {
                 return document;
@@ -261,15 +272,19 @@ class Utils {
             }
             element = element.nextSibling;
         }
+
         return false;
     }
 
     static is(element, selector) {
-        return (element.matches
-        || element[ 'webkitMatchesSelector' ]
-        || element[ 'mozMatchesSelector' ]
-        || element[ 'msMatchesSelector' ]
-        || element[ 'oMatchesSelector' ]).call( element, selector );
+        if (element.nodeType == Node.ELEMENT_NODE) {
+            return (element.matches
+            || element[ 'webkitMatchesSelector' ]
+            || element[ 'mozMatchesSelector' ]
+            || element[ 'msMatchesSelector' ]
+            || element[ 'oMatchesSelector' ]).call( element, selector );
+        }
+        return false;
     }
 
 
