@@ -238,6 +238,32 @@ class Utils {
         return false;
     }
 
+    static getPreviousSibling(element, selector) {
+        while (element) {
+            if (element === document) {
+                return document;
+            }
+            if (Utils.is(element, selector)) {
+                return element;
+            }
+            element = element.previousSibling;
+        }
+        return false;
+    }
+
+    static getNextSibling(element, selector) {
+        while (element) {
+            if (element === document) {
+                return document;
+            }
+            if (Utils.is(element, selector)) {
+                return element;
+            }
+            element = element.nextSibling;
+        }
+        return false;
+    }
+
     static is(element, selector) {
         return (element.matches
         || element[ 'webkitMatchesSelector' ]
