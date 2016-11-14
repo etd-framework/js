@@ -41,7 +41,7 @@ module.exports = function(grunt) {
                 compress: true,
                 beautify: false,
                 sourceMap: true,
-                preserveComments: 'some',
+                preserveComments: false,
                 banner: '/**!\n\t* @package     <%= pkg.name %>\n\t*\n\t* @version     <%= pkg.version %>\n\t* @copyright   Copyright (C) <%= grunt.template.today("yyyy") %> ETD Solutions. Tous droits réservés.\n\t* @license     Apache-2.0 \n\t* @author      ETD Solutions http://etd-solutions.com\n*/\n',
                 screwIE8: true,
                 quoteStyle: 0
