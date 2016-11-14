@@ -211,7 +211,7 @@ class Base {
                 this.isStopped = true;
             };
 
-            if (this._listeners[event.type] && Array.isArray(this._listeners[event.type])) {
+            if (Array.isArray(this._listeners[event.type])) {
                 var emitArgs  = [event].concat(args);
                 var listeners = this._listeners[event.type];
                 for(var i=0, len=listeners.length; i<len; i++) {
