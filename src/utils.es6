@@ -417,6 +417,29 @@ class Utils {
 
     }
 
+    /**
+     * Méthode pour déclencher un événement sur un élément DOM
+     *
+     * @param {HTMLElement} element    La cible (target) de l'évènement.
+     * @param {string}      type       Le type d'événement à envoyer.
+     *
+     * @return {bool} La valeur renvoyée est false si au moins un des gestionnaires d'évènements gérant cet évènement a appelé preventDefault. Dans les autres cas, la valeur renvoyée est true.
+     */
+    static triggerEvent(element, type) {
+
+        var e;
+
+        if ('createEvent' in document) {
+            e = document.createEvent('HTMLEvents');
+            e.initEvent(type, false, true);
+            return element.dispatchEvent(e);
+        } else {
+            e = document.createEventObject();
+            e.eventType = type;
+            return element.fireEvent('on' + e.eventType, e);
+        }
+    }
+
 }
 
 export default Utils;
