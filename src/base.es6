@@ -205,10 +205,21 @@ class Base {
                 throw new Error("Event object missing 'type' property.");
             }
 
+            event.defaultPrevented = false;
             event.isStopped = false;
 
+            /**
+             * Empêche d'autres listeners du même évévement d'être appelé.
+             */
             event.stopImmediatePropagation = function() {
                 this.isStopped = true;
+            };
+
+            /**
+             * Annule l'évènement s'il est annulable, sans stopper sa propagation.
+             */
+            event.preventDefault = function() {
+                this.defaultPrevented = true;
             };
 
             if (Array.isArray(this._listeners[event.type])) {
