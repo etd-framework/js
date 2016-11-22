@@ -73,7 +73,7 @@ class Base {
      */
     constructor(element, options) {
 
-        this.element  = document.getElementById(element);
+        this.element  = typeof element == "string" ? document.getElementById(element) : element;
         this.options  = {};
         this._listeners = {};
 
