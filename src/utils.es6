@@ -287,6 +287,13 @@ class Utils {
         return false;
     }
 
+    static removeElement(element) {
+        if (element.parentNode) {
+            element.parentNode.removeChild(element);
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Méthode pour arrondir un nombre
