@@ -447,6 +447,25 @@ class Utils {
         }
     }
 
+    /**
+     * Assigne de gestionnaires d'évènements sur plusieurs éléments cibles.
+     *
+     * @param selector   chaîne qui contient un ou plusieurs sélecteurs CSS séparés par des virgules.
+     * @param event      une chaîne représentant le type d'évènement à enregistrer.
+     * @param listener   l'objet qui recevra une notification lorsqu'un évènement du type spécifié se produit
+     * @param useCapture si défini à true, useCapture indique que l'utilisateur désire initier la capture
+     * @param baseEl     élément de base pour querySelectorAll
+     */
+    static addEventListener(selector, event, listener, useCapture, baseEl) {
+        
+        let base = baseEl || document;
+
+        for (let el of base.querySelectorAll(selector)) {
+            el.addEventListener(event, listener, useCapture);
+        }
+        
+    }
+
 }
 
 export default Utils;
