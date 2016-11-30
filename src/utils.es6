@@ -466,6 +466,37 @@ class Utils {
         
     }
 
+    /**
+     * Retourne une représentation d'un formulaire sous forme d'objet.
+     *
+     * @param {HTMLElement} element L'élément contenant les champs à inclure.
+     *
+     * @returns {{}}
+     */
+    static serialize(element) {
+
+        let s = {};
+
+        for (let field of element.querySelectorAll("input, select, textarea")) {
+            if (field.name && !field.disabled) {
+                if (field.type == 'select-multiple') {
+                    for (let j=0, l=field.options.length; j < l; j++) {
+                        if (field.options[j].selected) {
+                            if (!s[field.name]) {
+                                s[field.name] = [];
+                            }
+                            s[field.name].push(field.options[j].value);
+                        }
+                    }
+                } else if ((field.type != 'checkbox' && field.type != 'radio') || field.checked) {
+                    s[field.name] = field.value;
+                }
+            }
+        }
+
+        return s;
+    }
+
 }
 
 export default Utils;
