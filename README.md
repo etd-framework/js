@@ -4,5 +4,5 @@
 
 ```bash
 yarn global add grunt-cli
-yarn add --dev
+yarn install --dev
 ```
