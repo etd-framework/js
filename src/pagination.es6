@@ -27,9 +27,9 @@ class Pagination {
     update(total, start, limit) {
 
         // Initialisation.
-        var viewall      = false;
-        var pagesCurrent = 0;
-        var pagesTotal   = 0;
+        let viewall      = false;
+        let pagesCurrent = 0;
+        let pagesTotal   = 0;
 
         start = Math.max(start, 0);
         limit = Math.max(limit, 0);
@@ -38,9 +38,12 @@ class Pagination {
             start = 0;
         }
 
-        if (!limit) {
-            limit = total;
+        if (limit === 0) {
             start = 0;
+        }
+
+        if (typeof limit === "undefined") {
+            limit = total;
         }
 
         /*
@@ -58,9 +61,9 @@ class Pagination {
         }
 
         // On définit les valeurs de la boucle d'itération de la pagination.
-        var displayedPages = 10;
-        var pagesStart     = pagesCurrent - (displayedPages / 2);
-        var pagesStop;
+        let displayedPages = 10;
+        let pagesStart     = pagesCurrent - (displayedPages / 2);
+        let pagesStop;
 
         if (pagesStart < 1) {
             pagesStart = 1;
@@ -79,7 +82,7 @@ class Pagination {
         }
 
         // Si on affiche tous les enregistrements, on passe le drapeau à true.
-        if (limit == 0) {
+        if (limit === 0) {
             viewall = true;
         }
 
